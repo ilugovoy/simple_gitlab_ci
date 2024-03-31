@@ -1,0 +1,8 @@
+This is a test file for the grep command.
+It contains multiple patterns that can be matched using grep.
+For example, it contains the word "example".
+The file also has some numbers like 12345 and 67890.
+This line does not contain any specific pattern.
+IN in 
+iN 
+In 90

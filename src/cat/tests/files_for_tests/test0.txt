@@ -1,0 +1,36 @@
+
+
+This is a sample text file for testing the functionality of the program.
+It contains different lines, tabs, and line breaks.
+Let's see how the program handles various options:
+
+-b or --number-nonblank: This option adds line numbers only to non-blank lines.
+1. This line has a number.
+2. This line also has a number.
+3.
+4. This line is the fourth one.
+5.
+
+
+                                        This line contains a tab before the text.                       
+
+
+
+    
+-e: This option indicates that an additional character should be displayed at the end of each line, such as a dollar sign ($).
+This line has an additional character at the end.$
+This line also ends with an additional character.$
+This line is empty.$
+
+-n or --number: This option adds line numbers to all lines, including blank lines.
+1. This line has a number.
+2. This line also has a number.
+3.
+4. This line is the fourth one.
+5.
+
+-s or --squeeze-blank: This option removes multiple consecutive blank lines and replaces them with a single blank line.
+
+- t: This option indicates that tabs should be expanded. Here is a tab:	And here is the expanded tab.
+
+That's it for the sample text file. You can use it to test the program's functionality and see how the different options work. Happy testing!

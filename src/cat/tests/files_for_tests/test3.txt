@@ -1,0 +1,15 @@
+
+#include <stdio.h>
+
+int main(int arg_count, char* files[]) {
+
+
+
+  for (int i = 0; i < arg_count; i++) {
+
+			kfc
+    puts(files[i]);
+  }
+  return 0;
+}
+

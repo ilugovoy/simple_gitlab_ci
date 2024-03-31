@@ -1,0 +1,39 @@
+jzjzjzjzjzjzj
+enenfiwnaownocejn orvir
+
+#include <stdio.h>
+
+int main(int arg_count, char 90* files[]) {90
+
+	for(int i = 0; i < arg_count; i++) {	
+		puts(files[i]);90
+	}9
+	return 90;
+}
+
+8 903 388 99 99
+903-371-2222
+8 903-566-1313
+8 56
+21
+test.txt
+test.txt1
+a
+
+
+in in in
+
+in
+
+ininin
+
+90
+fungusgr@student.21-school.ru
+
+test.txt1
+
+test1.txt
+
+test1.txt1 test1.txt1 test1.txt1
+
+test.txt
