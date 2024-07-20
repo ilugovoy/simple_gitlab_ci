@@ -1,4 +1,4 @@
-BOT_TOKEN="6725006255:AAEw9MquYSCXxkflncVrUBTA9DJBUY07pJU"
+BOT_TOKEN="$ENV_TOKEN"
 CHAT_WITH_USER_ID="332612674"
 
 COMMIT_USER=$(git log -1 --pretty=format:'%an') # Получаем имя пользователя, совершившего коммит
