@@ -494,7 +494,9 @@ deploy:
 
 ```bash
 
-BOT_TOKEN="$ENV_TOKEN" # можно создать переменную окружения и записать в неё значение токена
+# можно создать переменную окружения ENV_TOKEN и записать в неё значение токена
+# Settings > CI/CD > Variables
+BOT_TOKEN="$ENV_TOKEN"
 CHAT_WITH_USER_ID="А ТУТ АЙДИ ПОЛЬЗОВАТЕЛЯ КОМУ ПИСАТЬ"
 
 if [ "$CI_JOB_STATUS" == "success" ]; then
