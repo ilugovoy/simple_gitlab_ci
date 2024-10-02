@@ -1,0 +1,98 @@
+image: gcc:latest
+#  используется образ компилятора GCC для сборки проекта
+
+
+stages:
+  - build
+  - style
+  - integration_test
+  - deploy
+  - notify
+
+
+# задание для сборки
+build:
+  stage: build
+  script:
+    - cd src/cat
+    - make
+    - |
+    - cd ../grep
+    - make
+  artifacts:
+    paths:
+      - src/cat/
+      - src/grep/
+    expire_in: 30 days
+  after_script:
+    - ./ci/telegram_notifications.sh  # Задание для отправки уведомлений о статусе пайплайна
+
+
+# задание для теста стиля кода
+style:
+  stage: style
+  script:
+    - cd src/cat
+    - make style_test | tee tests/style_test.log
+    - if grep -q "не соответствует стилю форматирования" tests/style_test.log; then exit 1; fi
+    - |
+    - cd ../grep
+    - make style_test | tee unit_tests/style_test.log
+    - if grep -q "не соответствует стилю форматирования" unit_tests/style_test.log; then exit 1; fi
+  after_script:
+    - ./ci/telegram_notifications.sh  # Задание для отправки уведомлений о статусе пайплайна
+
+
+# задание для интеграционного тестирования
+integration_test:
+  stage: integration_test
+  script:
+    - |
+      cd src/cat
+      make test | tee tests_result.log
+      if grep -q "FAIL: 0" tests_result.log; then
+        echo "Интеграционные тесты cat прошли успешно!"
+      else
+        echo "Интеграционные тесты cat не прошли!"
+        exit 1
+      fi
+    - |  
+      cd ../grep
+      make test | tee tests_result.log
+      if grep -q "FAIL: 0" tests_result.log; then
+        echo "Интеграционные тесты grep прошли успешно!"
+      else
+        echo "Интеграционные тесты grep не прошли!"
+        exit 1
+      fi
+  dependencies:
+    - build
+    - style
+  when: on_success
+  after_script:
+    - ./ci/telegram_notifications.sh  # Задание для отправки уведомлений о статусе пайплайна
+
+# Задание для отправки уведомлений о успешном прохождении пайплайна с приглашением подтвердить деплой
+send_notification:
+  stage: notify
+  script:
+    - ./ci/notifications_result.sh  
+  dependencies:
+    - build
+    - style
+    - integration_test
+  when: on_success
+
+# задание для деплоя на прод
+deploy:
+  stage: deploy
+  script:
+    - ./ci/deploy_script.sh
+  dependencies:
+    - build
+    - style
+    - integration_test
+  when: manual
+  after_script:
+    - ./ci/notification_deploy.sh  # Задание для отправки уведомлений о статусе пайплайна
+
